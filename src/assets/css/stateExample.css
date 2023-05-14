@@ -1,0 +1,11 @@
+.state-example-wrapper {
+  margin-bottom: 40px;
+}
+.counter-text {
+  font-size: 30px;
+}
+.state-change-btn {
+  font-size: 15px;
+  padding: 5px 10px;
+  margin: 10px;
+}
