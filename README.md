@@ -16,11 +16,11 @@ Nó giúp bạn viết các ứng dụng hoạt động một cách nhất quán
 - Cài đặt thư viện redux và react-redux
 
 ```
-npm install redux
+yarn add redux
 ```
 
 ```
-npm install react-redux
+yarn add react-redux
 ```
 
 - Khởi tạo file <b>actionTypes.js</b> đây là file xác định tất các loại ```actions``` mà app sẽ sử dụng:
@@ -332,7 +332,7 @@ Redux-form là một thư viện hỗ trợ trong việc quản lý React form s
 - Cài đặt thư viện ```Redux form```
 
 ```
-npm i redux-form
+yarn add redux-form
 ```
 
 - Đầu tiên ta truyền ```formReducer``` đến ```store```. Reducer này sẽ phục vụ tất cả form components trong app của mình.
