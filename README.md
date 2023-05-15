@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# React component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React component hay component là một block code độc lập, có khả năng tái sử dụng. Việc chia UI thành các component giúp cho việc tổ chức và quản lý code dễ dàng hơn
 
-## Available Scripts
+React component bao gồm 2 loại:
 
-In the project directory, you can run:
+- **Class component**
+- **Functional component**
 
-### `npm start`
+# Class component
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Đặc điểm
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Các Class component đơn giản là những **class ES6** kế thừa từ class tên 'Component' của React
+- Mọi Class component sẽ **phải chứa method render()**, nơi **return một JSX template** hoặc **null**
+- Trong docs mới nhất của React, Class component đã được đưa vào danh mục 'Legacy React APIs' và đội ngũ phát triển React cũng khuyến khích việc sử dụng Functional Component để thay thế. Tuy nhiên, Class component hiện vẫn sẽ được hỗ trợ sử dụng
 
-### `npm test`
+> https://react.dev/reference/react/Component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Syntax
 
-### `npm run build`
+```
+import React, { Component } from "react";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+class ClassExample extends Component {
+  // Trong class phải có method render
+  render() {
+    // return một JSX template
+    return (
+      <div>
+        <h1>Class Example</h1>
+      </div>
+    );
+  }
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default ClassExample;
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Functional component
 
-### `npm run eject`
+## Đặc điểm
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Xuất hiện từ phiên bản React 16.8
+- Functional component được tạo bởi một hàm JavaScript, **return một JSX template** hoặc **null**
+- Vì được **tạo bởi một hàm JavaScript**, ta có thể viết Functional component dưới dạng **JS function** thông thường hay **ES6 arrow function**
+- Với việc đội ngũ phát triển React đang chú trọng phát triển các **hooks** và **cách viết, triển khai code khá dễ hiểu**, Functional component được khuyến khích sử dụng
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Syntax
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+JS function
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+function FunctionalExample() {
+  return (
+    <div>
+      <h1>Functional Example</h1>
+    </div>
+  );
+}
+```
 
-## Learn More
+ES6 arrow function
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+const FunctionalExample = () => {
+  return (
+    <div>
+      <h1>Functional Example</h1>
+    </div>
+  );
+};
+```
