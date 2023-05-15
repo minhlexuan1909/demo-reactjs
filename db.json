@@ -1,0 +1,26 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "The first post",
+      "content": "This is the first post",
+      "author": { "username": "user1", "fullname": "User 1" },
+      "userId": 1
+    }
+  ],
+  "comments": [
+    {
+      "body": "some comment 1",
+      "postId": "1",
+      "id": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "address": "Vietnam",
+      "fullname": "User 1"
+    }
+  ]
+}

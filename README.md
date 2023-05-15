@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# [JSON Server](https://github.com/typicode/json-server)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Là một thư viện giúp ta có thể tạo 1 máy chủ giả cung cấp RESTful API một cách đầy đủ trong 1 khoảng thời gian ngắn mà không cần code.
 
-## Available Scripts
+Cài JSON Server:
 
-In the project directory, you can run:
+```bash
+npm install --dev-save json-server
+```
 
-### `npm start`
+hoặc nếu dùng `yarn`:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+yarn add json-server -D json-server
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Thêm một đoạn script cho JSON Server trong khối `scripts` trong file `package.json`:
 
-### `npm test`
+```json
+"scripts": {
+  ...,
+  "start-server": "json-server --watch db.json --port 3001",
+  ...
+}
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Tạo một file database (Ví dụ: `db.json`) cùng cấp folder với file `package.json` với 1 vài dữ liệu:
 
-### `npm run build`
+```json
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "The first post",
+      "content": "This is the first post",
+      "author": { "username": "user1", "fullname": "User 1" },
+      "userId": 1
+    }
+  ],
+  "comments": [{ "body": "comment 1", "postId": "1", "id": 1 }],
+  "authors": [
+    { "id": 1, "username": "user1", "address": "Vietnam", "fullname": "User 1" }
+  ]
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Bắt đầu chạy JSON Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run start-server
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+or
 
-### `npm run eject`
+```bash
+yarn start-server
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Khi đã chạy server xong, nếu bạn call đến api [http://localhost:3001/posts/1]('http://localhost:3001/posts/1'), bạn sẽ nhận được:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```json
+{
+  "id": 1,
+  "title": "The first post",
+  "content": "This is the first post",
+  "author": { "username": "user1", "fullname": "User 1" },
+  "userId": 1
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<!-- Tương tự, bạn có thể tạo requests với các phương thức khác, nhưng có vài lưu ý là:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Nếu bạn tạo POST, PUT, PATCH hoặc DELETE requests, những thay đổi sẽ được lưu một cách tự động và an toàn vào file db.json (nhờ việc sử dụng [lowdb](https://github.com/typicode/lowdb))
+- Phần body truyền lên của request phải là một đối tượng JSON, giống như kết quả cuả phương thức GET (ví dụ: `{"name": "The first post"}`)
+- Trường `id` là không thể thay đổi. Nếu có bất kì trường `id` nào trong phần body của PUT hoặc PATCH request sẽ được bỏ qua. Nếu là trong POST request thì sẽ được chấp nhận, nhưng chỉ khi giá trị `id` đó chưa được sử dụng.
+- Một POST, PUT, PATCH request phải `Content-Type: application/json` trong phần header để sử dụng JSON strong phần body của request. Nếu không thì vẫn sẽ trả về status code 2XX, nhưng phần data sẽ không được thay đổi. -->
 
-## Learn More
+# Fetch from Server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Sử dụng bộ API có sẵn của [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
