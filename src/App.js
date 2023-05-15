@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import store from "./redux";
+import Users from "./components/Users";
+import ContactForm from "./components/ReduxForm/ContactForm";
+import showResults from "./components/ReduxForm/showResults";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div>
+        <Users />
+      </div>
+      <div style={{ padding: 15 }}>
+        <h2>Simple Form Redux form</h2>
+          <ContactForm onSubmit={showResults} />
+      </div>
+    </Provider>
   );
 }
 
