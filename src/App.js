@@ -1,24 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import AboutPage from "./components/AboutPage";
+import UnauthorizedPage from "./components/UnauthorizedPage";
+import RedirectedPage from "./components/RedirectedPage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <ul className="header">
+          <li className="header-item">
+            <NavLink exact to="/" activeClassName="active-header-item">
+              Home
+            </NavLink>
+          </li>
+          <li className="header-item">
+            <NavLink exact to="/about" activeClassName="active-header-item">
+              About
+            </NavLink>
+          </li>
+          <li className="header-item">
+            <NavLink
+              exact
+              to="/unauthorized"
+              activeClassName="active-header-item"
+            >
+              Unauthorized
+            </NavLink>
+          </li>
+          <li className="header-item">
+            <NavLink
+              exact
+              to="/redirected"
+              activeClassName="active-header-item"
+            >
+              Redirected
+            </NavLink>
+          </li>
+        </ul>
+
+        <Switch>
+          <Route path="/">
+            <HomePage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
+          </Route>
+          <Route exact path="/unauthorized">
+            <UnauthorizedPage />
+          </Route>
+          <Route exact path="/redirected">
+            <RedirectedPage />
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
