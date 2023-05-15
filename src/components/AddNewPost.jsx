@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import handleError from "../utils/handleError";
 
-const url = "https://jsonplaceholder.typicode.com/photos";
+const url = "http://localhost:3001/posts";
 
 const AddNewPost = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const handleSaveClick = async (event) => {
     event.preventDefault(); // chặn hành động mặc định của form (hành động submit form)
-    console.log("form: ", event);
     if (title.trim() && body.trim()) {
       fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "json/application",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(event.data),
+        body: JSON.stringify({
+          title,
+          body,
+        }),
       })
         .then((data) => {
           if (data.status >= 400) {
@@ -28,11 +32,17 @@ const AddNewPost = () => {
         })
         .then((data) => {
           navigate(-1);
+        })
+        .catch((error) => {
+          handleError(error.message, setError);
         });
+    } else {
+      handleError("Vui lòng điền đẩy đủ thông tin", setError);
     }
   };
 
-  const handleBackClick = () => {
+  const handleBackClick = (event) => {
+    event.preventDefault(); // chặn hành động mặc định của form (hành động submit form)
     navigate(-1);
   };
 
@@ -42,6 +52,7 @@ const AddNewPost = () => {
         <h3 className="my-4">Tạo mới bài viết</h3>
       </div>
 
+      {error && <p className="text-danger">Lỗi: {error}</p>}
       <form>
         <div className="form-group">
           <label htmlFor="titleInput">Tiêu đề:</label>

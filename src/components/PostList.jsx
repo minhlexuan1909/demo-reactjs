@@ -1,21 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import handleError from "../utils/handleError";
 // import fetch from "cross-fetch";
-const url = "https://jsonplaceholder.typicode.com/posts";
+const url = "http://localhost:3001/posts";
 
 const PostList = () => {
   const [posts, setPosts] = React.useState([]);
   const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
-
-  const handleError = (message) => {
-    setError(message);
-    const timeout = setTimeout(() => {
-      setError("");
-      clearTimeout(timeout);
-    }, 2000);
-  };
 
   const handleDelete = (selectedItem) => {
     fetch(`${url}/${selectedItem.id}`, {
@@ -31,7 +25,7 @@ const PostList = () => {
         setPosts(posts.filter((item) => item.id !== selectedItem.id));
       })
       .catch((error) => {
-        handleError(error.message);
+        handleError(error.message, setError);
       });
   };
 
@@ -47,7 +41,6 @@ const PostList = () => {
           if (data.status >= 400) {
             throw new Error(data.message || "Bad response from server");
           }
-          console.log("data1: ", data);
           return data.json();
         })
         .then((data) => {
@@ -55,7 +48,7 @@ const PostList = () => {
         })
         .catch((error) => {
           setPosts([]);
-          handleError(error.message);
+          handleError(error.message, setError);
         });
     };
 
@@ -67,7 +60,7 @@ const PostList = () => {
         setPosts(jsonData);
       } catch (error) {
         setPosts([]);
-        setError(error.message);
+        handleError(error.message, setError);
       }
     };
 
@@ -105,7 +98,8 @@ const PostList = () => {
                 {item.id}
               </th>
               <td>
-                <a href={`/posts/${item.id}`}>{item.title}</a>
+                {/* <a href={`/posts/${item.id}`}>{item.title}</a> */}
+                <Link to={`/posts/${item.id}`}>{item.title}</Link>
               </td>
               <td> {item.body} </td>
               <td style={{ textAlign: "center" }}>

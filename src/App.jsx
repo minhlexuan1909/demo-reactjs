@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import PostList from "./components/PostList";
 import AddNewPost from "./components/AddNewPost";
-import PhotoList from "./components/PhotoList";
+import PostList from "./components/PostList";
+import PostDetail from "./components/PostDetail";
 
 const router = createBrowserRouter([
   {
@@ -11,16 +11,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/posts/:id",
-    element: <PostList />,
+    element: <PostDetail />,
   },
   {
     path: "/posts/add-new",
     element: <AddNewPost />,
-  },
-
-  {
-    path: "/photos",
-    element: <PhotoList />,
   },
 ]);
 

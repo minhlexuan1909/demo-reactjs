@@ -3,15 +3,23 @@
     {
       "id": 1,
       "title": "The first post",
-      "content": "This is the first post",
-      "author": { "username": "user1", "fullname": "User 1" },
-      "userId": 1
+      "body": "This is the first post",
+      "author": {
+        "username": "user1",
+        "fullname": "User 1"
+      }
+    },
+    {
+      "title": "Bài viết 2",
+      "body": "Nội dung Bài viết 2",
+      "author": "user1",
+      "id": 2
     }
   ],
   "comments": [
     {
-      "body": "some comment 1",
-      "postId": "1",
+      "body": "some comment ",
+      "postId": 1,
       "id": 1
     }
   ],
