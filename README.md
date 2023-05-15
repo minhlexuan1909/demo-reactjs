@@ -19,7 +19,7 @@ React component bao gồm 2 loại:
 
 ## Syntax
 
-```
+```js
 import React, { Component } from "react";
 
 class ClassExample extends Component {
@@ -50,7 +50,7 @@ export default ClassExample;
 
 JS function
 
-```
+```js
 function FunctionalExample() {
   return (
     <div>
@@ -62,7 +62,7 @@ function FunctionalExample() {
 
 ES6 arrow function
 
-```
+```js
 const FunctionalExample = () => {
   return (
     <div>
