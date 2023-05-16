@@ -1,70 +1,154 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Trong React.js, có hai phương pháp để xử lý biểu mẫu: biểu mẫu kiểm soát (controlled forms) và biểu mẫu không kiểm soát (uncontrolled forms). Sự khác biệt chính giữa chúng nằm ở cách quản lý và cập nhật dữ liệu biểu mẫu.
 
-## Available Scripts
+# Controlled Forms
+Biểu mẫu kiểm soát là các biểu mẫu mà dữ liệu biểu mẫu được quản lý bởi các ```React components```. Trong ```Controlled Forms```, các phần tử form input (ví dụ: ```input fields, checkboxes, selects```) được liên kết với ```component's state```, và bất kỳ thay đổi nào trong các phần tử input đều kích hoạt việc cập nhật ```component's state```. Sau đó, ```components``` được cập nhật và hiển thị dữ liệu biểu mẫu đã được cập nhật.
 
-In the project directory, you can run:
+### Đặc điểm quan trọng của `Controlled Forms`:
+- Dữ liệu biểu mẫu được lưu trữ trong  ```component's state```.
+- Các trường nhập liệu nhận giá trị từ `state`.
+- Các thay đổi trong các trường nhập liệu được xử lý bởi các trình xử lý sự kiện, cập nhật `state` với các giá trị mới.
+- `Component` được cập nhật với dữ liệu biểu mẫu đã được cập nhật.
 
-### `npm start`
+### Ví dụ:
+```js
+import React, { useState } from "react";
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+function ControlledForms() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-### `npm test`
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Perform form submission logic here
+    console.log(formData);
+    alert(JSON.stringify(formData));
+  };
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
 
-### `npm run build`
+export default ControlledForms;
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Lợi ích của `controlled forms`:
+- Bạn có đầy đủ kiểm soát về dữ liệu biểu mẫu và có thể thực hiện validations, transformations, hoặc xử lý các logic khác trước khi cập nhật `state` hoặc gửi biểu mẫu.
+- Bạn có thể dễ dàng triển khai các tính năng như validations form, hoặc phản hồi thời gian thực cho người dùng.
+- Dữ liệu biểu mẫu có thể dễ dàng điều chỉnh hoặc xử lý trước khi gửi đến máy chủ.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Bất lợi của `controlled forms`:
+- `Controlled forms` có thể yêu cầu nhiều code và xử lý sự kiện hơn so với  `Uncontrolled forms`.
 
-### `npm run eject`
+- Nếu bạn có một biểu mẫu lớn với nhiều trường nhập liệu, việc quản lý `state` cho mỗi trường có thể trở nên phức tạp.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Uncontrolled Forms
+`Uncontrolled Forms` là biểu mẫu trong đó dữ liệu biểu mẫu được xử lý bởi các phần tử DOM, thay vì được điều khiển bởi các `React component`. Trong `Uncontrolled Forms`, các trường nhập liệu không được liên kết một cách rõ ràng với `component's state`. Thay vào đó, bạn sử dụng các tham chiếu (refs) để truy cập giá trị trường nhập liệu khi cần thiết.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Đặc điểm quan trọng của `Uncontrolled Forms`:
+- Dữ liệu biểu mẫu được quản lý trực tiếp bởi các phần tử DOM.
+- Trường nhập liệu được truy cập bằng cách sử dụng tham chiếu (refs) để lấy giá trị khi cần thiết.
+- Không có quản lý `state` rõ ràng cho dữ liệu biểu mẫu.
+- Các thay đổi trong trường nhập liệu không được theo dõi hoặc xử lý một cách rõ ràng bởi các `React components`.
 
-## Learn More
+### Ví dụ:
+```js
+import React, { useRef } from "react";
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function UncontrolledForms() {
+  const nameInputRef = useRef();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Access form data using refs
+    const name = nameInputRef.current.value;
+    const email = emailInputRef.current.value;
+    const password = passwordInputRef.current.value;
+    // Perform form submission logic here
+    console.log(name, email, password);
+    alert(name + "    " + email + "    " +  password);
+    // Reset the form
+    event.target.reset();
+  };
 
-### Code Splitting
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" ref={nameInputRef} />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input type="email" ref={emailInputRef} />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" ref={passwordInputRef} />
+      </label>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+export default UncontrolledForms;
 
-### Analyzing the Bundle Size
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Lợi ích của `Uncontrolled forms`:
+- Biểu mẫu không được điều khiển đơn giản hơn và yêu cầu ít cide hơn so với `controlled forms`.
+- Chúng hữu ích cho các biểu mẫu đơn giản không yêu cầu quản lý `state` phức tạp.
+- Dễ dàng truy cập trực tiếp giá trị trường nhập liệu khi cần thiết, ví dụ như trong quá trình gửi biểu mẫu.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Bất lợi của `Uncontrolled forms`:
+- Bị hạn chế về việc kiểm soát dữ liệu biểu mẫu và không thể dễ dàng thực hiện kiểm tra hoặc biến đổi dữ liệu trước khi gửi biểu mẫu.
+- Có thể khó khăn khi triển khai các tính năng biểu mẫu nâng cao như validations thời gian thực hoặc tương tác giữa các trường phụ thuộc.
+- Việc thao tác hoặc xử lý dữ liệu biểu mẫu trước khi gửi nó đến máy chủ có thể đòi hỏi các bước bổ sung.
