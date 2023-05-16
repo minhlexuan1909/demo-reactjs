@@ -42,10 +42,10 @@ function App() {
         </ul>
 
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/about">
+          <Route exact path="/about">
             <AboutPage />
           </Route>
           <Route exact path="/unauthorized">
