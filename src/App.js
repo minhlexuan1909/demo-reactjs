@@ -1,10 +1,14 @@
+import "./App.css";
+
 import React from "react";
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
-import HomePage from "./components/HomePage";
+
 import AboutPage from "./components/AboutPage";
-import UnauthorizedPage from "./components/UnauthorizedPage";
+import HomePage from "./components/HomePage";
+import ProductDetailPage from "./components/ProductDetailPage";
+import ProductPage from "./components/ProductPage";
 import RedirectedPage from "./components/RedirectedPage";
-import "./App.css";
+import UnauthorizedPage from "./components/UnauthorizedPage";
 
 function App() {
   return (
@@ -19,6 +23,11 @@ function App() {
           <li className="header-item">
             <NavLink exact to="/about" activeClassName="active-header-item">
               About
+            </NavLink>
+          </li>
+          <li className="header-item">
+            <NavLink exact to="/product" activeClassName="active-header-item">
+              Product
             </NavLink>
           </li>
           <li className="header-item">
@@ -47,6 +56,12 @@ function App() {
           </Route>
           <Route exact path="/about">
             <AboutPage />
+          </Route>
+          <Route exact path="/product">
+            <ProductPage />
+          </Route>
+          <Route exact path="/product/:id">
+            <ProductDetailPage />
           </Route>
           <Route exact path="/unauthorized">
             <UnauthorizedPage />

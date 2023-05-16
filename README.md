@@ -37,7 +37,7 @@ VD, ta có 2 trang là /user và /product
 # Cài đặt
 
 ```
-yarn add react-router-dom@4.2.2
+yarn add react-router-dom@5.3.4
 ```
 
 # Các component cơ bản
@@ -85,22 +85,26 @@ VD trên sẽ gây ra lỗi sau
 
 - Một header để điều hướng trang web
 - Tab đang active sẽ có màu vàng, tab không active sẽ có màu xanh
-- Click tab sẽ render ra UI tương ứng, ngoại trừ tab Unauthorized, khi click tab này sẽ tự chuyển hướng đến Redirected Page
+- Click tab sẽ render ra UI tương ứng, ngoại trừ tab Unauthorized, khi click tab này sẽ tự động chuyển hướng đến Redirected Page nhờ component Redirect
+- Page Product sẽ có 1 vài product, khi click sẽ chuyển đến trang tương ứng và hiện ra id của product
 
 ```js
+import "./App.css";
+
 import React from "react";
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
-import HomePage from "./components/HomePage";
+
 import AboutPage from "./components/AboutPage";
-import UnauthorizedPage from "./components/UnauthorizedPage";
+import HomePage from "./components/HomePage";
+import ProductDetailPage from "./components/ProductDetailPage";
+import ProductPage from "./components/ProductPage";
 import RedirectedPage from "./components/RedirectedPage";
-import "./App.css";
+import UnauthorizedPage from "./components/UnauthorizedPage";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        // Header
         <ul className="header">
           <li className="header-item">
             <NavLink exact to="/" activeClassName="active-header-item">
@@ -110,6 +114,11 @@ function App() {
           <li className="header-item">
             <NavLink exact to="/about" activeClassName="active-header-item">
               About
+            </NavLink>
+          </li>
+          <li className="header-item">
+            <NavLink exact to="/product" activeClassName="active-header-item">
+              Product
             </NavLink>
           </li>
           <li className="header-item">
@@ -131,13 +140,19 @@ function App() {
             </NavLink>
           </li>
         </ul>
+
         <Switch>
-          // Định nghĩa routing của web
           <Route exact path="/">
             <HomePage />
           </Route>
           <Route exact path="/about">
             <AboutPage />
+          </Route>
+          <Route exact path="/product">
+            <ProductPage />
+          </Route>
+          <Route exact path="/product/:id">
+            <ProductDetailPage />
           </Route>
           <Route exact path="/unauthorized">
             <UnauthorizedPage />
