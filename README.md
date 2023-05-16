@@ -6,7 +6,7 @@
 npm install -g yarn
 ```
 
-- Cài đặt node modules projects thông qua `yarn`
+- Cài đặt thư viện được định nghĩa trong package.json và các dependencies của projects thông qua `yarn`
 
 ```
 yarn
@@ -23,6 +23,8 @@ The page will reload when you make changes.
 You may also see any lint errors in the console.
 
 <img src="https://i.stack.imgur.com/8SHQU.png"/>
+
+<img src="https://www.w3schools.com/react/screenshot_myfirstreact.png"/>
 
 ```
 yarn test
