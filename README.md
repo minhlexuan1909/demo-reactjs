@@ -1,5 +1,30 @@
 ### Cài đặt project
 
+- Clone repository từ github https://github.com/minhlexuan1909/demo-reactjs.git
+
+```
+git clone https://github.com/minhlexuan1909/demo-reactjs.git
+```
+
+
+Hiển thị list branch của repository
+```
+git branch -r
+```
+
+<img src="https://firebasestorage.googleapis.com/v0/b/guide-app-6b862.appspot.com/o/Screenshot%202023-05-17%20210635.png?alt=media&token=37a67a92-fff7-4921-84dc-0ddf93ca1f8a"/>
+
+Chuyển qua lại giữa các branch
+```
+git branch checkout [name-branch]
+```
+
+Ví dụ:
+```
+git branch checkout origin/redux
+```
+> Lưu ý: Chỉ chuyển branch khi mà code của project chưa thay đổi hoặc code mới của branch đã được commit.
+
 - Cài đặt `yarn` cho máy tính
 
 ```
