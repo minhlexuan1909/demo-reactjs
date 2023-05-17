@@ -86,7 +86,8 @@ const PostList = () => {
             <th scope="col">Nội dung</th>
             <th
               scope="col"
-              style={{ textAlign: "center", whiteSpace: "nowrap" }}>
+              style={{ textAlign: "center", whiteSpace: "nowrap" }}
+            >
               Hành động
             </th>
           </tr>
@@ -105,7 +106,8 @@ const PostList = () => {
               <td style={{ textAlign: "center" }}>
                 <button
                   className="btn btn-primary"
-                  onClick={() => handleDelete(item)}>
+                  onClick={() => handleDelete(item)}
+                >
                   Xóa
                 </button>
               </td>

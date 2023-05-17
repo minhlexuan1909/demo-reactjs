@@ -13,7 +13,6 @@ const CommentWrap = ({ comments, handleDelete, handleAdd }) => {
   };
 
   const handleDeleteClick = (item) => {
-    console.log("item: ", item);
     if (item.id) {
       handleDelete(item.id);
     } else {
@@ -27,7 +26,8 @@ const CommentWrap = ({ comments, handleDelete, handleAdd }) => {
         <span>Danh sách comments:</span>
         <button
           className="btn btn-sm btn-primary mb-2"
-          onClick={handleAddClick}>
+          onClick={handleAddClick}
+        >
           {newComment === null ? "Thêm mới" : "Lưu"}
         </button>
       </div>
@@ -39,11 +39,13 @@ const CommentWrap = ({ comments, handleDelete, handleAdd }) => {
           comments?.map((item) => (
             <li
               key={item.id}
-              className="list-group-item d-flex align-items-center justify-content-between">
+              className="list-group-item d-flex align-items-center justify-content-between"
+            >
               <span>{`${item.id}. ${item.body}`}</span>
               <button
                 className="btn btn-sm btn-outline-danger"
-                onClick={() => handleDeleteClick(item)}>
+                onClick={() => handleDeleteClick(item)}
+              >
                 Xóa
               </button>
             </li>
@@ -52,7 +54,8 @@ const CommentWrap = ({ comments, handleDelete, handleAdd }) => {
         {newComment !== null && (
           <li
             key={"newComment"}
-            className="list-group-item d-flex justify-content-between">
+            className="list-group-item d-flex justify-content-between"
+          >
             <input
               className="form-control form-control-sm mr-3"
               type="text"
@@ -65,7 +68,8 @@ const CommentWrap = ({ comments, handleDelete, handleAdd }) => {
             />
             <button
               className="btn btn-sm btn-outline-danger"
-              onClick={() => handleDeleteClick(newComment)}>
+              onClick={() => handleDeleteClick(newComment)}
+            >
               Xóa
             </button>
           </li>
