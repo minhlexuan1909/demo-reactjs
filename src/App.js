@@ -7,8 +7,6 @@ function App() {
     <div className="App">
       <h1>Ví dụ về React Animation</h1>
       <AnimationExample />
-
-      {/* <CustomCard /> */}
     </div>
   );
 }
